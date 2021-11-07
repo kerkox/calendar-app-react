@@ -12,7 +12,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import "moment/locale/es";
 import { useDispatch } from "react-redux";
 import { uiOpenModal } from "../../actions/ui";
-import { eventClearActiveEvent, eventSetActive } from "../../actions/events";
+import { eventAddNew, eventClearActiveEvent, eventSetActive } from "../../actions/events";
 import { AddNewFab } from "../ui/AddNewFab";
 import { useSelector } from "react-redux";
 import { DeleteEventFab } from "../ui/DeleteEventFab";
@@ -55,8 +55,23 @@ export const CalendarScreen = () => {
   };
 
   const onSelectSlot = (e) => {
-    // console.log(e)
+    console.log(e)
     dispatch( eventClearActiveEvent())
+    const userActionsCalendar = ['doubleClick', 'select']
+    if(userActionsCalendar.includes(e.action)) {
+      const newEvent = {
+        title: "Nuevo Evento",
+        notes: "",
+        start: e.start,
+        end: e.end,
+        id: new Date().getTime(),
+        user: {
+          _id: "123",
+          name: "Paul",
+        },
+      };
+      dispatch( eventAddNew(newEvent))
+    }
   }
 
   const eventStyleGetter = (event, start, end, isSelected) => {
