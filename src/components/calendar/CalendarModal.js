@@ -9,6 +9,7 @@ import {
   eventAddNew,
   eventClearActiveEvent,
   eventSetActive,
+  eventUpdated,
 } from "../../actions/events";
 
 const customStyles = {
@@ -101,17 +102,22 @@ export const CalendarModal = () => {
     }
 
     console.log("Se va a agregar el evento nuevo");
-    //TODO: realizar grabacion en el backend
-    dispatch(
-      eventAddNew({
-        ...formValues,
-        id: new Date().getTime(),
-        user: {
-          _id: "123",
-          name: "Paul",
-        },
-      })
-    );
+    if(activeEvent){
+      dispatch(
+        eventUpdated(formValues)
+      );
+    } else {
+      dispatch(
+        eventAddNew({
+          ...formValues,
+          id: new Date().getTime(),
+          user: {
+            _id: "123",
+            name: "Paul",
+          },
+        })
+      );
+    }
 
     setTitleValid(true);
     closeModal();
