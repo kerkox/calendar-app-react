@@ -49,6 +49,8 @@ export const CalendarModal = () => {
   useEffect(() => {
     if (activeEvent) {
       setFormValues(activeEvent);
+    } else {
+      setFormValues(initEvent);
     }
   }, [activeEvent, setFormValues]);
 
@@ -102,10 +104,8 @@ export const CalendarModal = () => {
     }
 
     console.log("Se va a agregar el evento nuevo");
-    if(activeEvent){
-      dispatch(
-        eventUpdated(formValues)
-      );
+    if (activeEvent) {
+      dispatch(eventUpdated(formValues));
     } else {
       dispatch(
         eventAddNew({
