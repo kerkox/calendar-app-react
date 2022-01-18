@@ -70,7 +70,7 @@ export const CalendarScreen = () => {
           name: "Paul",
         },
       };
-      dispatch( eventAddNew(newEvent))
+      dispatch( eventAddNew(newEvent) )
     }
   }
 

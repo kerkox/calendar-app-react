@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# Calendar App - Frontend
+Proyecto de frontend para el curso de React de Fernando Herrera en Udemy
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Proyecto backend
+[Repo proyecto del backend](https://github.com/kerkox/calendar-backend-udemy)
 
 ## Available Scripts
 
