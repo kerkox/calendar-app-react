@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   eventAddNew,
   eventClearActiveEvent,
-  eventSetActive,
+  // eventSetActive,
   eventUpdated,
 } from "../../actions/events";
 
