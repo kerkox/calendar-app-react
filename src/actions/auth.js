@@ -10,12 +10,14 @@ export const startLogin = (email, password) => {
       localStorage.setItem("token", body.token);
       localStorage.setItem("token-init-date", new Date().getTime());
 
-      dispatch(login({
-        uid: body.uid,
-        name: body.name
-      }))
+      dispatch(
+        login({
+          uid: body.uid,
+          name: body.name,
+        })
+      );
     } else {
-      Swal.fire('Error', body.msg, 'error' );
+      Swal.fire("Error", body.msg, "error");
     }
   };
 };
@@ -24,3 +26,28 @@ const login = (user) => ({
   type: types.authLogin,
   payload: user,
 });
+
+export const startRegister = (name, email, password) => {
+  return async (dispatch) => {
+    const resp = await fetchSinToken(
+      "auth/new",
+      { name, email, password },
+      "POST"
+    );
+    const body = await resp.json();
+    if (body.ok) {
+      localStorage.setItem("token", body.token);
+      localStorage.setItem("token-init-date", new Date().getTime());
+
+      dispatch(
+        login({
+          uid: body.uid,
+          name: body.name,
+        })
+      );
+    } else {
+      Swal.fire("Error", body.msg, "error");
+    }
+  };
+};
+

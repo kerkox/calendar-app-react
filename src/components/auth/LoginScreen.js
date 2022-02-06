@@ -1,32 +1,52 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { startLogin } from "../../actions/auth";
+import Swal from "sweetalert2";
+import { startLogin, startRegister } from "../../actions/auth";
 import { useForm } from "../../hooks/useForm";
 import "./login.css";
 
 export const LoginScreen = () => {
+  const dispatch = useDispatch();
+
   const [formLoginValues, handleLoginInputChange] = useForm({
     lEmail: "paul@gmail.com",
     lPassword: "123456",
   });
 
-	const dispatch = useDispatch();
+  const [formRegisterValues, handleRegisterInputChange] = useForm({
+    rName: "Jeniffer",
+    rEmail: "jeniffer@gmail.com",
+    rPassword: "123456",
+    rPasswordConfirmation: "123456",
+  });
+
+  const { rName, rEmail, rPassword, rPasswordConfirmation } =
+    formRegisterValues;
 
   const { lEmail, lPassword } = formLoginValues;
 
-	const handleLogin = ( e ) => {
-		e.preventDefault();
-		console.log(formLoginValues)
-		const { lEmail, lPassword } = formLoginValues
-		dispatch(startLogin( lEmail, lPassword));
-	}
+  const handleLogin = (e) => {
+    e.preventDefault();
+    console.log(formLoginValues);
+    const { lEmail, lPassword } = formLoginValues;
+    dispatch(startLogin(lEmail, lPassword));
+  };
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const { rName, rEmail, rPassword, rPasswordConfirmation } = formRegisterValues;
+    if (rPassword !== rPasswordConfirmation) {
+      return Swal.fire("Error", "Las contraseñas deben ser iguales", "error");
+    }
+    dispatch(startRegister(rName, rEmail, rPassword));
+  };
 
   return (
     <div className="container login-container">
       <div className="row">
         <div className="col-md-6 login-form-1">
           <h3>Ingreso</h3>
-          <form onSubmit={ handleLogin }>
+          <form onSubmit={handleLogin}>
             <div className="form-group">
               <input
                 type="text"
@@ -55,12 +75,15 @@ export const LoginScreen = () => {
 
         <div className="col-md-6 login-form-2">
           <h3>Registro</h3>
-          <form>
+          <form onSubmit={handleRegister}>
             <div className="form-group">
               <input
                 type="text"
                 className="form-control"
                 placeholder="Nombre"
+                name="rName"
+                value={rName}
+                onChange={handleRegisterInputChange}
               />
             </div>
             <div className="form-group">
@@ -68,6 +91,9 @@ export const LoginScreen = () => {
                 type="email"
                 className="form-control"
                 placeholder="Correo"
+                name="rEmail"
+                value={rEmail}
+                onChange={handleRegisterInputChange}
               />
             </div>
             <div className="form-group">
@@ -75,6 +101,9 @@ export const LoginScreen = () => {
                 type="password"
                 className="form-control"
                 placeholder="Contraseña"
+                name="rPassword"
+                value={rPassword}
+                onChange={handleRegisterInputChange}
               />
             </div>
 
@@ -83,6 +112,9 @@ export const LoginScreen = () => {
                 type="password"
                 className="form-control"
                 placeholder="Repita la contraseña"
+                name="rPasswordConfirmation"
+                value={rPasswordConfirmation}
+                onChange={handleRegisterInputChange}
               />
             </div>
 
