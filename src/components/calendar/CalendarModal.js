@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   eventStartAddNew,
   eventClearActiveEvent,
-  eventUpdated,
+  eventStartUpdate,
 } from "../../actions/events";
 
 const customStyles = {
@@ -104,7 +104,7 @@ export const CalendarModal = () => {
 
     console.log("Se va a agregar el evento nuevo");
     if (activeEvent) {
-      dispatch(eventUpdated(formValues));
+      dispatch(eventStartUpdate(formValues));
     } else {
       dispatch(
         eventStartAddNew(formValues)
