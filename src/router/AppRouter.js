@@ -42,7 +42,7 @@ export const AppRouter = () => {
             component={CalendarScreen}
             isAuthenticated={!!uid}
           />
-          <Redirect to="/" />
+          <Redirect to="/login" />
         </Switch>
       </div>
     </Router>
