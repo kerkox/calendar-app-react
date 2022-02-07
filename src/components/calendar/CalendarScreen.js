@@ -36,7 +36,7 @@ export const CalendarScreen = () => {
   );
 
   useEffect(() => {
-    dispatch(eventStartLoading());
+    dispatch(eventStartLoading());    
   }, [dispatch])
 
   const onDoubleClick = (e) => {
