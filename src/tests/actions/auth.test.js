@@ -114,8 +114,6 @@ describe("Pruebas en las acciones Auth", () => {
 
       const actions = store.getActions();
 
-      console.log(actions)
-
       expect(actions[0]).toEqual({
         type:types.authLogin,
         payload: {
